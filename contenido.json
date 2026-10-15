@@ -258,7 +258,8 @@
     {
      "id": "00cuso",
      "tipo": "repaso",
-     "titulo": "Repaso: matrices y determinantes"
+     "titulo": "Repaso: matrices y determinantes",
+     "n": 10
     },
     {
      "id": "00dy38",
@@ -326,7 +327,7 @@
      "id": "00k2iz",
      "tipo": "prueba",
      "titulo": "Prueba final de Álgebra",
-     "n": 6
+     "n": 30
     }
    ]
   },
