@@ -206,6 +206,8 @@ const mo=new MutationObserver(()=>{if(busy||typeof renderMathInElement!="functio
 mo.observe(app,{childList:true,subtree:true});
 let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(fit,150)});
 try{document.fonts.ready.then(fit);document.fonts.addEventListener("loadingdone",fit)}catch(e){}
+// La tipografía matemática solo se descarga cuando aparece la primera fórmula; se pide ya para que los paréntesis no salgan pequeños un momento
+try{document.fonts.load('1em "Noto Sans Math"',"∑(")}catch(e){}
 
 /* ---------- Arranque ---------- */
 function cargar(c){C=c;C.marca=C.marca||{};B=construir(C);if(C.marca.nombre)document.title=`${C.marca.nombre} · ${C.marca.titulo||"Matemáticas II"}`}

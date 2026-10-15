@@ -49,7 +49,11 @@ const AYUDA_EJ=`<details class="help"><summary>Cómo hacer ejercicios con númer
 <p>3. En la respuesta escribe la fórmula sin llaves: <code>a*b+1</code>. La app la calcula para cada alumno. Acepta <code>+ - * / ^</code>, <code>sqrt(x)</code>, <code>abs(x)</code> y paréntesis.</p>
 <p>Extras para el texto: <code>{{frac(a,b)}}</code> escribe la fracción simplificada, <code>{{signo(b)}}</code> escribe «+ 3» o «− 3» (útil en <code>x {{signo(b)}}</code>), y <code>{{coef(a)}}</code> no escribe nada si a vale 1 (útil en <code>{{coef(a)}}x</code>), y <code>{{par(b)}}</code> pone paréntesis si b es negativo (útil en <code>{{a}} \\cdot {{par(b)}}</code>).</p>
 <p>Las <b>variables calculadas</b> sirven para valores intermedios: <code>d = a*b - c</code>. La <b>condición</b> descarta combinaciones que no quieres: <code>a != b</code>, <code>d != 0</code>, <code>a*b &lt; 50</code>.</p>
-<p>Si no usas variables, el ejercicio es fijo: escribe el enunciado y la respuesta como número (por ejemplo <code>3/4</code>).</p></details>`;
+<p>Si no usas variables, el ejercicio es fijo: escribe el enunciado y la respuesta como número (por ejemplo <code>3/4</code>).</p>
+<p><b>Matrices y vectores.</b> Crea una «Matriz aleatoria» (por ejemplo <code>A</code>, 3×3, entre −9 y 9) o un «Vector aleatorio». En el texto, <code>{{A}}</code> la dibuja entera: <code>$A={{A}}$</code>. En las fórmulas puedes usar:</p>
+<table><tr><td><code>A+B</code> <code>A-B</code> <code>2*A</code></td><td>suma, resta, por un número</td></tr><tr><td><code>A*B</code> <code>A^2</code></td><td>producto, potencia</td></tr><tr><td><code>det(A)</code> <code>inv(A)</code></td><td>determinante, inversa</td></tr><tr><td><code>tras(A)</code> <code>rango(A)</code></td><td>traspuesta, rango</td></tr><tr><td><code>A[2,3]</code></td><td>el elemento de la fila 2, columna 3</td></tr><tr><td><code>id(3)</code></td><td>la identidad 3×3</td></tr><tr><td><code>dot(u,v)</code> <code>cross(u,v)</code> <code>norm(u)</code></td><td>producto escalar, vectorial, módulo</td></tr></table>
+<p><code>{{vdet(A)}}</code> dibuja el determinante con barras. Si la respuesta es una matriz o un vector, usa el tipo «Matriz o vector» y escribe la fórmula entera, por ejemplo <code>A*B</code>: el tamaño se calcula solo. Para la inversa, añade la condición <code>det(A) != 0</code>.</p>
+<p>La variable <b>«Uno de una lista»</b> elige al azar entre los valores que escribas: <code>2, 3, 5</code>.</p></details>`;
 
 /* ---------- Formulario (columna central) ---------- */
 function form(){
@@ -95,27 +99,38 @@ function card(p,c){
  let h=`<div class="card" id="card${c}"><div class="hd" data-card="${c}"><b>${open?"▾":"▸"} ${c+1}. ${TPL[p.tipo]||"Numérico"}</b><span>${esc((p.enunciado||"").slice(0,90))}</span><em id="ok${c}"></em></div>`;
  if(!open)return h+"</div>";
  h+=`<div class="bd">${sel(P+"tipo","Tipo",Object.entries(TPL),{re:1})}${ta(P+"enunciado","Enunciado",{rows:3,tools:1,vars:1})}
- <div class="f"><span>Variables aleatorias</span><div class="vars">${(p.variables||[]).map((v,i)=>v.tipo=="formula"
-  ?`<div class="var"><input class="nm" data-k="${P}variables.${i}.nombre" value="${esc(v.nombre||"")}" placeholder="d" aria-label="Nombre"> = <input class="fx" data-k="${P}variables.${i}.formula" value="${esc(v.formula||"")}" placeholder="a*b - c" aria-label="Fórmula"><button class="b s d" data-delvar="${c}.${i}">✕</button></div>`
-  :`<div class="var"><input class="nm" data-k="${P}variables.${i}.nombre" value="${esc(v.nombre||"")}" placeholder="a" aria-label="Nombre"> entre <input class="num" type="number" data-t="num" data-k="${P}variables.${i}.min" value="${esc(v.min??"")}" aria-label="Desde"> y <input class="num" type="number" data-t="num" data-k="${P}variables.${i}.max" value="${esc(v.max??"")}" aria-label="Hasta"><label><input type="checkbox" data-t="check" data-k="${P}variables.${i}.sinCero" ${v.sinCero?"checked":""}> sin 0</label><button class="b s d" data-delvar="${c}.${i}">✕</button></div>`).join("")}</div>
- <button class="b s" data-addvar="${c}.rango">+ Variable aleatoria</button> <button class="b s" data-addvar="${c}.formula">+ Variable calculada</button></div>
+ <div class="f"><span>Variables</span><div class="vars">${(p.variables||[]).map((v,i)=>varRow(P,c,v,i)).join("")}</div>
+ <button class="b s" data-addvar="${c}.rango">+ Número aleatorio</button> <button class="b s" data-addvar="${c}.matriz">+ Matriz aleatoria</button> <button class="b s" data-addvar="${c}.vector">+ Vector aleatorio</button> <button class="b s" data-addvar="${c}.lista">+ Uno de una lista</button> <button class="b s" data-addvar="${c}.formula">+ Calculada</button></div>
  ${inp(P+"condicion","Condición (opcional)",{ph:"a != b",help:"Se repiten los números hasta que se cumpla."})}`;
  const t=p.tipo||"calc";
  if(t=="calc")h+=inp(P+"respuesta","Respuesta (número o fórmula)",{ph:"a*b + 1",help:"Se acepta como correcta con una tolerancia de 0,01. El alumno puede responder con decimales o fracciones."});
  if(t=="test")h+=ta(P+"opciones","Opciones, una por línea",{lines:1,rows:4,help:"La <b>primera</b> es la correcta; a los alumnos se les muestran mezcladas. Puedes usar fórmulas y {{variables}}."});
  if(t=="vf")h+=sel(P+"verdadero","La afirmación es…",[["true","Verdadera"],["false","Falsa"]],{bool:1});
  if(t=="orden")h+=ta(P+"pasos","Pasos en el orden correcto, uno por línea",{lines:1,rows:4,help:"A los alumnos se les muestran desordenados."});
- if(t=="mat"){const r=+p.filas||2,co=+p.columnas||2;h+=`<div class="row">${inp(P+"filas","Filas",{num:1,ph:"2"})}${inp(P+"columnas","Columnas",{num:1,ph:"2"})}</div>
-  <div class="f"><span>Respuesta, elemento a elemento (número o fórmula)</span><div class="grid-m" style="grid-template-columns:repeat(${co},auto)">${[...Array(r*co)].map((_,i)=>`<input data-k="${P}respuestas.${i}" value="${esc((p.respuestas||[])[i]??"")}" aria-label="Elemento ${i+1}">`).join("")}</div></div>`}
+ if(t=="mat"){h+=inp(P+"respuesta","Respuesta: fórmula de la matriz o el vector",{ph:"A*B",help:"Por ejemplo <code>A*B</code>, <code>inv(A)</code>, <code>tras(A)</code> o <code>cross(u,v)</code>. El tamaño de la casilla de respuesta se calcula solo."});
+  // Formato antiguo, elemento a elemento: solo se muestra si ya se usaba y no hay fórmula
+  if(!String(p.respuesta??"").trim()&&(p.respuestas||[]).some(x=>String(x).trim())){const r=+p.filas||2,co=+p.columnas||2;h+=`<div class="row">${inp(P+"filas","Filas",{num:1,ph:"2"})}${inp(P+"columnas","Columnas",{num:1,ph:"2"})}</div>
+  <div class="f"><span>O escríbela elemento a elemento</span><div class="grid-m" style="grid-template-columns:repeat(${co},auto)">${[...Array(r*co)].map((_,i)=>`<input data-k="${P}respuestas.${i}" value="${esc((p.respuestas||[])[i]??"")}" aria-label="Elemento ${i+1}">`).join("")}</div></div>`}}
  h+=ta(P+"pistas","Pistas, una por línea (opcional)",{lines:1,rows:2,help:"Se muestran una a una tras cada fallo. Al tercer fallo sale la solución."})+ta(P+"solucion","Solución paso a paso, un paso por línea",{lines:1,rows:3});
  h+=`<div id="st${c}"></div><div class="tb"><button class="b s p" data-probar="${c}">Probar en la vista previa</button><button class="b s" data-ej="${c}.subir">↑</button><button class="b s" data-ej="${c}.bajar">↓</button><button class="b s" data-ej="${c}.duplicar">Duplicar</button><button class="b s d" data-ej="${c}.borrar">Borrar</button></div></div></div>`;
  return h;
+}
+function varRow(P,c,v,i){
+ const K=`${P}variables.${i}.`,del=`<button class="b s d" data-delvar="${c}.${i}" title="Quitar">✕</button>`;
+ const nm=`<input class="nm" data-k="${K}nombre" value="${esc(v.nombre||"")}" placeholder="a" aria-label="Nombre">`;
+ const n=(k,l)=>`<input class="num" type="number" data-t="num" data-k="${K}${k}" value="${esc(v[k]??"")}" aria-label="${l}">`;
+ const rango=`de ${n("min","Desde")} a ${n("max","Hasta")}<label><input type="checkbox" data-t="check" data-k="${K}sinCero" ${v.sinCero?"checked":""}> sin 0</label>`;
+ if(v.tipo=="formula")return `<div class="var">${nm} = <input class="fx" data-k="${K}formula" value="${esc(v.formula||"")}" placeholder="a*b - c" aria-label="Fórmula">${del}</div>`;
+ if(v.tipo=="lista")return `<div class="var">${nm} uno de <input class="fx" data-k="${K}valores" value="${esc(v.valores||"")}" placeholder="2, 3, 5" aria-label="Valores">${del}</div>`;
+ if(v.tipo=="matriz")return `<div class="var">${nm} matriz ${n("filas","Filas")}×${n("columnas","Columnas")} ${rango}${del}</div>`;
+ if(v.tipo=="vector")return `<div class="var">${nm} vector de ${n("componentes","Componentes")} comp. ${rango}${del}</div>`;
+ return `<div class="var">${nm} ${rango}${del}</div>`;
 }
 // Comprueba una plantilla generándola varias veces y muestra el resultado en su tarjeta
 function probarPlantilla(p){
  const vistos=[];
  for(let r=0;r<25;r++){const e=instanciar(p);if(e.k=="test"&&new Set(e.opts).size<e.opts.length)throw new Error("con algunos números, dos opciones del test salen iguales. Añade una condición.");if(r<1)vistos.push(e)}
- const e=vistos[0];return e.k=="test"?(p.tipo=="vf"?"":"opción correcta: "+e.opts[0]):e.k=="orden"?"":e.k=="mat"?"respuesta: "+e.ans.join(", "):"respuesta: "+fmtN(e.ans);
+ const e=vistos[0];return e.k=="test"?(p.tipo=="vf"?"":"opción correcta: "+e.opts[0]):e.k=="orden"?"":e.k=="mat"?`respuesta (${e.rows}×${e.cols}): `+e.ans.map(x=>fmtN(x)).join(" · "):"respuesta: "+fmtN(e.ans);
 }
 function revisar(c){
  const it=blq().items[cur.i],p=it.ejercicios[c],ok=$("#ok"+c),st=$("#st"+c);
@@ -154,10 +169,12 @@ document.addEventListener("click",ev=>{
  if(d.tool!=null)return herramienta(d.tool,d.for);
  const it=cur.view=="item"?blq().items[cur.i]:null;
  if(d.delauto!=null){it.automaticos.splice(+d.delauto,1);marcar();form();return previa()}
- if(d.newej){it.ejercicios=it.ejercicios||[];const p={tipo:d.newej,enunciado:"",variables:[],pistas:[],solucion:[]};if(d.newej=="test")p.opciones=["",""];if(d.newej=="vf")p.verdadero=true;if(d.newej=="orden")p.pasos=["",""];if(d.newej=="mat"){p.filas=2;p.columnas=2;p.respuestas=[]}
+ if(d.newej){it.ejercicios=it.ejercicios||[];const p={tipo:d.newej,enunciado:"",variables:[],pistas:[],solucion:[]};if(d.newej=="test")p.opciones=["",""];if(d.newej=="vf")p.verdadero=true;if(d.newej=="orden")p.pasos=["",""];if(d.newej=="mat")p.respuesta=""
   it.ejercicios.push(p);abiertas.add(it.ejercicios.length-1);marcar();form();$("#card"+(it.ejercicios.length-1)).scrollIntoView({block:"start",behavior:"smooth"});return}
- if(d.addvar){const [c,tp]=d.addvar.split(".");const p=it.ejercicios[+c];p.variables=p.variables||[];const used=new Set(p.variables.map(v=>v.nombre)),n="abcdefghjkmnpqrstuvwxyz".split("").find(x=>!used.has(x))||"v"+p.variables.length;
-  p.variables.push(tp=="formula"?{nombre:n,tipo:"formula",formula:""}:{nombre:n,tipo:"rango",min:1,max:9,sinCero:false});marcar();return form()}
+ if(d.addvar){const [c,tp]=d.addvar.split(".");const p=it.ejercicios[+c];p.variables=p.variables||[];const used=new Set(p.variables.map(v=>v.nombre));
+  // Las matrices se nombran con mayúsculas (A, B…) y los vectores con u, v, w
+  const pool=tp=="matriz"?"ABCDEFGHMNPQ":tp=="vector"?"uvwst":"abcdefghjkmnpqrstxyz",n=pool.split("").find(x=>!used.has(x))||(tp=="matriz"?"M":"v")+p.variables.length;
+  p.variables.push({formula:{nombre:n,tipo:"formula",formula:""},lista:{nombre:n,tipo:"lista",valores:"2, 3, 5"},matriz:{nombre:n,tipo:"matriz",filas:2,columnas:2,min:-5,max:5,sinCero:false},vector:{nombre:n,tipo:"vector",componentes:3,min:-5,max:5,sinCero:false}}[tp]||{nombre:n,tipo:"rango",min:1,max:9,sinCero:false});marcar();return form()}
  if(d.delvar){const [c,i]=d.delvar.split(".").map(Number);it.ejercicios[c].variables.splice(i,1);marcar();return form()}
  if(d.probar!=null){const p=it.ejercicios[+d.probar];if(revisar(+d.probar))return;abrirPrevia();return enviar({k:blq().id,plantilla:p})}
  if(d.ej){const [c,a]=d.ej.split(".");const E=it.ejercicios,i=+c;
