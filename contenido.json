@@ -1,0 +1,774 @@
+{
+ "version": 1,
+ "marca": {
+  "nombre": "TAZ a TAZ",
+  "titulo": "Matemáticas II",
+  "subtitulo": "Elige un bloque. Cada uno es un camino: teoría, ejercicios de uno en uno, repasos y una prueba final con nota.",
+  "email": "tu@email.com",
+  "asunto": "Quiero una clase de Matemáticas II",
+  "ctaTitulo": "¿Algo no te ha salido?",
+  "ctaTexto": "Lo vemos juntos en una clase. Cuéntame qué bloque se te resiste y preparamos la selectividad a tu ritmo."
+ },
+ "bloques": [
+  {
+   "id": "algebra",
+   "nombre": "Álgebra",
+   "descripcion": "Matrices, determinantes y sistemas",
+   "items": [
+    {
+     "id": "0008ba",
+     "tipo": "teoria",
+     "titulo": "Matrices y operaciones",
+     "tema": "Tema 1 · Matrices",
+     "teoria": "Una matriz $m\\times n$ tiene $m$ filas y $n$ columnas. Es **cuadrada** si $m=n$. La **identidad** $I$ tiene unos en la diagonal principal y ceros en el resto.\n\n**Suma** y **producto por un número**: elemento a elemento.\n\n**Producto** $A\\cdot B$: solo es posible si el número de columnas de $A$ coincide con el de filas de $B$. Cada elemento es una fila de $A$ por una columna de $B$:\n\n$$\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\begin{pmatrix}e&f\\\\g&h\\end{pmatrix}=\\begin{pmatrix}ae+bg&af+bh\\\\ce+dg&cf+dh\\end{pmatrix}$$\n\nEn general $AB\\neq BA$.\n\n**Traspuesta** $A^t$: se cambian filas por columnas. Cumple $(A^t)^t=A$ y $(AB)^t=B^tA^t$. $A$ es **simétrica** si $A^t=A$.",
+     "ejemplo": "**Ejemplo.** Calcula $A\\cdot B$ con $A=\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}$ y $B=\\begin{pmatrix}3&1\\\\1&2\\end{pmatrix}$.\n\n1. Fila 1 por columna 1: $1\\cdot3+2\\cdot1=5$. Fila 1 por columna 2: $1\\cdot1+2\\cdot2=5$.\n\n2. Fila 2: $0\\cdot3+1\\cdot1=1$ y $0\\cdot1+1\\cdot2=2$.\n\n$$A\\cdot B=\\begin{pmatrix}5&5\\\\1&2\\end{pmatrix}$$"
+    },
+    {
+     "id": "001mov",
+     "tipo": "ejercicio",
+     "titulo": "Practica las operaciones",
+     "tema": "Tema 1 · Matrices",
+     "automaticos": [
+      "mSum",
+      "mProd",
+      "tTras",
+      "mEsc",
+      "vfProd"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "002gva",
+     "tipo": "teoria",
+     "titulo": "Matriz inversa y ecuaciones matriciales",
+     "tema": "Tema 1 · Matrices",
+     "teoria": "La inversa $A^{-1}$ cumple $A\\,A^{-1}=A^{-1}A=I$. Existe si y solo si $|A|\\neq0$, y se calcula así:\n\n$$A^{-1}=\\frac{1}{|A|}\\,(\\operatorname{Adj}A)^t$$\n\nPara una matriz $2\\times2$:\n\n$$\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}^{-1}=\\frac{1}{ad-bc}\\begin{pmatrix}d&-b\\\\-c&a\\end{pmatrix}$$\n\nPropiedad: $(AB)^{-1}=B^{-1}A^{-1}$.\n\n**Ecuaciones matriciales.** Se despeja multiplicando por la inversa, respetando el lado:\n\n- $AX=B\\Rightarrow X=A^{-1}B$\n- $XA=B\\Rightarrow X=BA^{-1}$",
+     "ejemplo": "**Ejemplo.** Calcula la inversa de $A=\\begin{pmatrix}2&1\\\\5&3\\end{pmatrix}$.\n\n1. $|A|=2\\cdot3-1\\cdot5=1\\neq0$, así que tiene inversa.\n\n2. Se cambian los elementos de la diagonal y se cambia el signo de los otros dos:\n\n$$A^{-1}=\\begin{pmatrix}3&-1\\\\-5&2\\end{pmatrix}$$\n\n3. Comprobación: $A\\cdot A^{-1}=I$."
+    },
+    {
+     "id": "003hql",
+     "tipo": "ejercicio",
+     "titulo": "Practica la inversa",
+     "tema": "Tema 1 · Matrices",
+     "automaticos": [
+      "mInv",
+      "tEcM",
+      "vfInvP"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "0049t9",
+     "tipo": "teoria",
+     "titulo": "Rango de una matriz",
+     "tema": "Tema 1 · Matrices",
+     "teoria": "El **rango** $\\operatorname{rg}(A)$ es el número máximo de filas (o columnas) linealmente independientes.\n\n**Por Gauss:** se hacen ceros debajo de la diagonal; el rango es el número de filas no nulas que quedan.\n\n**Por menores:** es el orden del mayor menor (determinante de una submatriz cuadrada) distinto de cero.\n\nUna fila nula, o proporcional o combinación de otras, no aumenta el rango.",
+     "ejemplo": "**Ejemplo.** Rango de $A=\\begin{pmatrix}1&2&3\\\\2&4&6\\\\1&0&1\\end{pmatrix}$.\n\n1. $F_2=2F_1$, así que $\\operatorname{rg}(A)\\leq2$.\n\n2. El menor $\\begin{vmatrix}1&2\\\\1&0\\end{vmatrix}=-2\\neq0$.\n\n3. Por tanto $\\operatorname{rg}(A)=2$."
+    },
+    {
+     "id": "005vlv",
+     "tipo": "ejercicio",
+     "titulo": "Practica el rango",
+     "tema": "Tema 1 · Matrices",
+     "automaticos": [
+      "gRango",
+      "vfRango"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "006sjc",
+     "tipo": "teoria",
+     "titulo": "Cálculo de determinantes",
+     "tema": "Tema 2 · Determinantes",
+     "teoria": "Orden 2:\n\n$$\\begin{vmatrix}a&b\\\\c&d\\end{vmatrix}=ad-bc$$\n\nOrden 3, **regla de Sarrus**: tres productos con signo $+$ (la diagonal principal y sus paralelas) y tres con signo $-$ (la otra diagonal y sus paralelas):\n\n$$\\begin{aligned}|A|=\\;&a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}\\\\-\\;&a_{13}a_{22}a_{31}-a_{11}a_{23}a_{32}-a_{12}a_{21}a_{33}\\end{aligned}$$\n\n**Desarrollo por una fila** (o columna):\n\n$$|A|=a_{11}A_{11}+a_{12}A_{12}+a_{13}A_{13}$$\n\ndonde el adjunto es $A_{ij}=(-1)^{i+j}M_{ij}$ y $M_{ij}$ es el menor que queda al quitar la fila $i$ y la columna $j$.",
+     "ejemplo": "**Ejemplo.** Determinante de $A=\\begin{pmatrix}1&0&2\\\\3&1&0\\\\0&2&1\\end{pmatrix}$.\n\n1. Por la primera fila: $1\\cdot(1\\cdot 1-0\\cdot 2)-0+2\\cdot(3\\cdot 2-1\\cdot 0)$.\n\n2. $|A|=1+12=13$."
+    },
+    {
+     "id": "007qxs",
+     "tipo": "ejercicio",
+     "titulo": "Practica los determinantes",
+     "tema": "Tema 2 · Determinantes",
+     "automaticos": [
+      "det2",
+      "det3g"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "0082t6",
+     "tipo": "teoria",
+     "titulo": "Propiedades de los determinantes",
+     "tema": "Tema 2 · Determinantes",
+     "teoria": "- $|A^t|=|A|$.\n- Si se intercambian dos filas, el determinante cambia de signo.\n- Si hay una fila de ceros, o dos filas iguales o proporcionales, $|A|=0$.\n- Si se multiplica una fila por $\\lambda$, el determinante queda multiplicado por $\\lambda$.\n- Para $A$ de orden $n$: $|\\lambda A|=\\lambda^n|A|$.\n- $|AB|=|A|\\cdot|B|$ y $|A^{-1}|=\\dfrac{1}{|A|}$.\n- Sumar a una fila una combinación de las otras no cambia el determinante (útil para hacer ceros).",
+     "ejemplo": "**Ejemplo.** $A$ es $3\\times3$ con $|A|=3$.\n\n1. $|2A|=2^3\\cdot3=24$.\n\n2. $|A^{-1}|=\\dfrac13$.\n\n3. $|A^tA|=|A^t|\\cdot|A|=9$."
+    },
+    {
+     "id": "009ure",
+     "tipo": "ejercicio",
+     "titulo": "Practica las propiedades",
+     "tema": "Tema 2 · Determinantes",
+     "automaticos": [
+      "detLam",
+      "vfDet"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "00adht",
+     "tipo": "teoria",
+     "titulo": "Determinantes con parámetros",
+     "tema": "Tema 2 · Determinantes",
+     "teoria": "Si la matriz depende de un parámetro $k$, se calcula $|A|$ como expresión en $k$ y se buscan los valores que la anulan.\n\n- Para esos valores, $A$ **no** tiene inversa y su rango baja.\n- Para el resto, $A$ es invertible y tiene rango máximo.",
+     "ejemplo": "**Ejemplo.** ¿Para qué valores de $k$ tiene inversa $A=\\begin{pmatrix}1&1&1\\\\1&k&1\\\\1&1&k\\end{pmatrix}$?\n\n1. $|A|=1\\cdot(k^2-1)-1\\cdot(k-1)+1\\cdot(1-k)=k^2-2k+1$.\n\n2. $|A|=(k-1)^2=0\\iff k=1$.\n\n3. Tiene inversa para todo $k\\neq1$."
+    },
+    {
+     "id": "00bvx4",
+     "tipo": "ejercicio",
+     "titulo": "Practica con parámetros",
+     "tema": "Tema 2 · Determinantes",
+     "automaticos": [
+      "detK",
+      "tInv"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "00cuso",
+     "tipo": "repaso",
+     "titulo": "Repaso: matrices y determinantes"
+    },
+    {
+     "id": "00dy38",
+     "tipo": "teoria",
+     "titulo": "Teorema de Rouché-Frobenius",
+     "tema": "Tema 3 · Sistemas lineales",
+     "teoria": "Un sistema se escribe $AX=B$, donde $A$ es la matriz de coeficientes y $A^*$ la **ampliada** (con la columna de términos independientes). Con $n$ incógnitas:\n\n- $\\operatorname{rg}A=\\operatorname{rg}A^*=n$: **compatible determinado** (solución única).\n- $\\operatorname{rg}A=\\operatorname{rg}A^*<n$: **compatible indeterminado** (infinitas soluciones, con $n-\\operatorname{rg}A$ parámetros).\n- $\\operatorname{rg}A\\neq\\operatorname{rg}A^*$: **incompatible** (sin solución).\n\nUn sistema **homogéneo** ($B=0$) siempre es compatible.",
+     "ejemplo": "**Ejemplo.** Un sistema de 3 incógnitas con $\\operatorname{rg}A=2$ y $\\operatorname{rg}A^*=2$.\n\n1. Los rangos son iguales: es compatible.\n\n2. $2<3$: es indeterminado, con $3-2=1$ parámetro."
+    },
+    {
+     "id": "00edy5",
+     "tipo": "ejercicio",
+     "titulo": "Practica Rouché",
+     "tema": "Tema 3 · Sistemas lineales",
+     "automaticos": [
+      "tRouche",
+      "vfHom"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "00f4t9",
+     "tipo": "teoria",
+     "titulo": "Regla de Cramer y método de Gauss",
+     "tema": "Tema 3 · Sistemas lineales",
+     "teoria": "**Cramer** (si $|A|\\neq0$): cada incógnita es un cociente de determinantes. $A_x$ es $A$ con la columna de $x$ sustituida por los términos independientes:\n\n$$x=\\frac{|A_x|}{|A|},\\quad y=\\frac{|A_y|}{|A|},\\quad z=\\frac{|A_z|}{|A|}$$\n\n**Gauss**: con operaciones entre filas de $A^*$ se hacen ceros debajo de la diagonal; después se resuelve de abajo arriba.",
+     "ejemplo": "**Ejemplo.** $\\begin{cases}x+y+z=6\\\\ y-z=-1\\\\ 2z=6\\end{cases}$ ya está escalonado.\n\n1. De la última ecuación: $z=3$.\n\n2. $y=-1+3=2$.\n\n3. $x=6-2-3=1$."
+    },
+    {
+     "id": "00gxeo",
+     "tipo": "ejercicio",
+     "titulo": "Practica Cramer y Gauss",
+     "tema": "Tema 3 · Sistemas lineales",
+     "automaticos": [
+      "sis2",
+      "cramer3",
+      "vfCr"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "00h6ew",
+     "tipo": "teoria",
+     "titulo": "Discusión de sistemas con parámetro",
+     "tema": "Tema 3 · Sistemas lineales",
+     "teoria": "Para discutir un sistema según un parámetro $k$:\n\n- Calcula $|A|$ y halla los valores de $k$ que lo anulan.\n- Para el resto de valores, $\\operatorname{rg}A=\\operatorname{rg}A^*=n$: compatible determinado.\n- Para cada valor especial, sustituye $k$ y estudia los rangos de $A$ y $A^*$.",
+     "ejemplo": "**Ejemplo.** $\\begin{cases}x+y+z=1\\\\ x+ky+z=2\\\\ x+y+kz=3\\end{cases}$\n\n1. $|A|=(k-1)^2$, que se anula en $k=1$.\n\n2. Si $k\\neq1$: compatible determinado.\n\n3. Si $k=1$: las dos primeras ecuaciones dicen $x+y+z=1$ y $x+y+z=2$. Incompatible."
+    },
+    {
+     "id": "00il8t",
+     "tipo": "ejercicio",
+     "titulo": "Practica la discusión",
+     "tema": "Tema 3 · Sistemas lineales",
+     "automaticos": [
+      "discK"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "00jdfe",
+     "tipo": "repaso",
+     "titulo": "Repaso de álgebra"
+    },
+    {
+     "id": "00k2iz",
+     "tipo": "prueba",
+     "titulo": "Prueba final de Álgebra",
+     "n": 6
+    }
+   ]
+  },
+  {
+   "id": "geometria",
+   "nombre": "Geometría",
+   "descripcion": "Vectores, rectas, planos, ángulos y distancias",
+   "items": [
+    {
+     "id": "00lwc1",
+     "tipo": "teoria",
+     "titulo": "Producto escalar",
+     "tema": "Tema 4 · Vectores en el espacio",
+     "teoria": "Con $\\vec u=(u_1,u_2,u_3)$ y $\\vec v=(v_1,v_2,v_3)$:\n\n$$\\vec u\\cdot\\vec v=u_1v_1+u_2v_2+u_3v_3$$\n\n$$\\vec u\\cdot\\vec v=|\\vec u|\\,|\\vec v|\\cos\\alpha$$\n\nMódulo y ángulo:\n\n$$|\\vec u|=\\sqrt{u_1^2+u_2^2+u_3^2}$$\n\n$$\\cos\\alpha=\\frac{\\vec u\\cdot\\vec v}{|\\vec u|\\,|\\vec v|}$$\n\nDos vectores no nulos son **perpendiculares** si y solo si $\\vec u\\cdot\\vec v=0$.",
+     "ejemplo": "**Ejemplo.** Ángulo entre $\\vec u=(1,0,1)$ y $\\vec v=(0,1,1)$.\n\n1. $\\vec u\\cdot\\vec v=0+0+1=1$.\n\n2. $|\\vec u|=|\\vec v|=\\sqrt2$.\n\n3. $\\cos\\alpha=\\dfrac{1}{2}$, así que $\\alpha=60^\\circ$."
+    },
+    {
+     "id": "00mu8g",
+     "tipo": "ejercicio",
+     "titulo": "Practica el producto escalar",
+     "tema": "Tema 4 · Vectores en el espacio",
+     "automaticos": [
+      "gEsc",
+      "gMod",
+      "gPerp",
+      "tPerp",
+      "vfMod"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "00npdu",
+     "tipo": "teoria",
+     "titulo": "Producto vectorial",
+     "tema": "Tema 4 · Vectores en el espacio",
+     "teoria": "$$\\vec u\\times\\vec v=\\begin{vmatrix}\\vec i&\\vec j&\\vec k\\\\u_1&u_2&u_3\\\\v_1&v_2&v_3\\end{vmatrix}$$\n\nComponentes:\n\n$$\\vec u\\times\\vec v=(u_2v_3-u_3v_2,\\;u_3v_1-u_1v_3,\\;u_1v_2-u_2v_1)$$\n\n- Es perpendicular a $\\vec u$ y a $\\vec v$.\n- $\\vec v\\times\\vec u=-(\\vec u\\times\\vec v)$.\n- $|\\vec u\\times\\vec v|$ es el área del paralelogramo de lados $\\vec u$ y $\\vec v$. El triángulo tiene la mitad.",
+     "ejemplo": "**Ejemplo.** $\\vec u=(1,2,0)$ y $\\vec v=(0,1,3)$.\n\n1. $\\vec u\\times\\vec v=(2\\cdot3-0\\cdot1,\\;0\\cdot0-1\\cdot3,\\;1\\cdot1-2\\cdot0)=(6,-3,1)$.\n\n2. Área del paralelogramo: $\\sqrt{36+9+1}=\\sqrt{46}$."
+    },
+    {
+     "id": "00owqt",
+     "tipo": "ejercicio",
+     "titulo": "Practica el producto vectorial",
+     "tema": "Tema 4 · Vectores en el espacio",
+     "automaticos": [
+      "gVec",
+      "vfVec"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "00p5oa",
+     "tipo": "teoria",
+     "titulo": "Producto mixto",
+     "tema": "Tema 4 · Vectores en el espacio",
+     "teoria": "$$[\\vec u,\\vec v,\\vec w]=\\vec u\\cdot(\\vec v\\times\\vec w)=\\begin{vmatrix}u_1&u_2&u_3\\\\v_1&v_2&v_3\\\\w_1&w_2&w_3\\end{vmatrix}$$\n\n- Volumen del paralelepípedo: $V=|[\\vec u,\\vec v,\\vec w]|$.\n- Volumen del tetraedro: $V=\\frac16|[\\vec u,\\vec v,\\vec w]|$.\n- Tres vectores son coplanarios si y solo si $[\\vec u,\\vec v,\\vec w]=0$.",
+     "ejemplo": "**Ejemplo.** $\\vec u=(1,0,0)$, $\\vec v=(0,2,0)$ y $\\vec w=(1,1,3)$.\n\n1. $[\\vec u,\\vec v,\\vec w]=1\\cdot(2\\cdot3-0\\cdot1)=6$.\n\n2. Paralelepípedo: $V=6$. Tetraedro: $V=1$."
+    },
+    {
+     "id": "00q11z",
+     "tipo": "ejercicio",
+     "titulo": "Practica el producto mixto",
+     "tema": "Tema 4 · Vectores en el espacio",
+     "automaticos": [
+      "gMixto",
+      "tCopl"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "00r959",
+     "tipo": "teoria",
+     "titulo": "Ecuaciones de rectas y planos",
+     "tema": "Tema 5 · Rectas y planos",
+     "teoria": "**Recta** por $A(a_1,a_2,a_3)$ con vector director $\\vec d=(d_1,d_2,d_3)$:\n\n- Vectorial: $(x,y,z)=A+\\lambda\\vec d$.\n- Paramétricas: $x=a_1+\\lambda d_1$, $y=a_2+\\lambda d_2$, $z=a_3+\\lambda d_3$.\n- Continua:\n\n$$\\frac{x-a_1}{d_1}=\\frac{y-a_2}{d_2}=\\frac{z-a_3}{d_3}$$\n\n- Implícita: como intersección de dos planos.\n\n**Plano** por $A$ con dos vectores directores $\\vec u$ y $\\vec v$, o en forma **general**:\n\n$$Ax+By+Cz+D=0$$\n\ndonde $\\vec n=(A,B,C)$ es un vector **normal** (perpendicular) al plano. Se puede obtener como $\\vec n=\\vec u\\times\\vec v$.",
+     "ejemplo": "**Ejemplo.** Plano por $P(1,2,0)$ con normal $\\vec n=(2,-1,3)$.\n\n1. La ecuación es $2x-y+3z+D=0$.\n\n2. Sustituyendo $P$: $2-2+0+D=0$, así que $D=0$.\n\n3. $\\pi:\\;2x-y+3z=0$."
+    },
+    {
+     "id": "00sb7b",
+     "tipo": "ejercicio",
+     "titulo": "Practica las ecuaciones",
+     "tema": "Tema 5 · Rectas y planos",
+     "automaticos": [
+      "gPlanoD",
+      "tDir",
+      "vfPtoPl"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "00ttme",
+     "tipo": "teoria",
+     "titulo": "Posiciones relativas",
+     "tema": "Tema 5 · Rectas y planos",
+     "teoria": "**Dos planos**, comparando sus coeficientes $(A,B,C,D)$:\n\n- Todos proporcionales: coincidentes.\n- $A,B,C$ proporcionales pero $D$ no: paralelos.\n- Normales no proporcionales: secantes (se cortan en una recta).\n\n**Recta y plano**:\n\n- $\\vec d\\cdot\\vec n\\neq0$: secantes (se cortan en un punto).\n- $\\vec d\\cdot\\vec n=0$: paralela, o contenida si un punto de la recta está en el plano.\n\n**Dos rectas**, con $A\\in r$ y $B\\in s$:\n\n- Directores proporcionales: paralelas, o coincidentes si comparten un punto.\n- Directores no proporcionales: se cortan si $[\\overrightarrow{AB},\\vec d_r,\\vec d_s]=0$ y se cruzan si es distinto de 0.\n\nTambién se puede estudiar con los rangos del sistema que forman sus ecuaciones.",
+     "ejemplo": "**Ejemplo.** $\\pi_1: x+2y-z=1$ y $\\pi_2: 2x+4y-2z=5$.\n\n1. $\\frac{2}{1}=\\frac{4}{2}=\\frac{-2}{-1}=2$, pero $\\frac{5}{1}\\neq2$.\n\n2. Son paralelos."
+    },
+    {
+     "id": "00uedl",
+     "tipo": "ejercicio",
+     "titulo": "Practica las posiciones",
+     "tema": "Tema 5 · Rectas y planos",
+     "automaticos": [
+      "tPosPl",
+      "gParal",
+      "tPosRR"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "00v07r",
+     "tipo": "repaso",
+     "titulo": "Repaso: vectores, rectas y planos"
+    },
+    {
+     "id": "00wltt",
+     "tipo": "teoria",
+     "titulo": "Ángulos",
+     "tema": "Tema 6 · Ángulos, distancias y esfera",
+     "teoria": "Entre dos rectas:\n\n$$\\cos\\alpha=\\frac{|\\vec d_r\\cdot\\vec d_s|}{|\\vec d_r|\\,|\\vec d_s|}$$\n\nEntre dos planos (con sus normales):\n\n$$\\cos\\alpha=\\frac{|\\vec n_1\\cdot\\vec n_2|}{|\\vec n_1|\\,|\\vec n_2|}$$\n\nEntre una recta y un plano:\n\n$$\\sin\\alpha=\\frac{|\\vec d\\cdot\\vec n|}{|\\vec d|\\,|\\vec n|}$$\n\nDos planos son perpendiculares si $\\vec n_1\\cdot\\vec n_2=0$.",
+     "ejemplo": "**Ejemplo.** Ángulo entre $x+y=0$ y $y+z=3$.\n\n1. Normales: $(1,1,0)$ y $(0,1,1)$.\n\n2. $\\cos\\alpha=\\dfrac{1}{\\sqrt2\\cdot\\sqrt2}=\\dfrac12$, así que $\\alpha=60^\\circ$."
+    },
+    {
+     "id": "00xef1",
+     "tipo": "ejercicio",
+     "titulo": "Practica los ángulos",
+     "tema": "Tema 6 · Ángulos, distancias y esfera",
+     "automaticos": [
+      "gPlPerp",
+      "tAngRP"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "00yypt",
+     "tipo": "teoria",
+     "titulo": "Distancias",
+     "tema": "Tema 6 · Ángulos, distancias y esfera",
+     "teoria": "Entre dos puntos: $d(P,Q)=|\\overrightarrow{PQ}|$.\n\nDe $P(x_0,y_0,z_0)$ al plano $Ax+By+Cz+D=0$:\n\n$$d=\\frac{|Ax_0+By_0+Cz_0+D|}{\\sqrt{A^2+B^2+C^2}}$$\n\nEntre planos paralelos con la misma normal:\n\n$$d=\\frac{|D_1-D_2|}{\\sqrt{A^2+B^2+C^2}}$$\n\nDe $P$ a la recta que pasa por $A$ con director $\\vec d$:\n\n$$d=\\frac{|\\overrightarrow{AP}\\times\\vec d|}{|\\vec d|}$$\n\nEntre dos rectas que se cruzan:\n\n$$d=\\frac{|[\\overrightarrow{AB},\\vec d_r,\\vec d_s]|}{|\\vec d_r\\times\\vec d_s|}$$",
+     "ejemplo": "**Ejemplo.** Distancia de $P(1,2,3)$ al plano $2x-y+2z-1=0$.\n\n1. Numerador: $|2-2+6-1|=5$.\n\n2. Denominador: $\\sqrt{4+1+4}=3$.\n\n3. $d=\\dfrac{5}{3}$."
+    },
+    {
+     "id": "00zvyk",
+     "tipo": "ejercicio",
+     "titulo": "Practica las distancias",
+     "tema": "Tema 6 · Ángulos, distancias y esfera",
+     "automaticos": [
+      "gDistPl",
+      "gDistPP",
+      "gDistPar"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "010i0j",
+     "tipo": "teoria",
+     "titulo": "La esfera",
+     "tema": "Tema 6 · Ángulos, distancias y esfera",
+     "teoria": "Esfera de centro $(a,b,c)$ y radio $r$:\n\n$$(x-a)^2+(y-b)^2+(z-c)^2=r^2$$\n\nDesarrollada queda $x^2+y^2+z^2+Ax+By+Cz+D=0$, con:\n\n$$\\text{centro}=\\left(-\\tfrac{A}{2},-\\tfrac{B}{2},-\\tfrac{C}{2}\\right)$$\n\n$$r=\\sqrt{a^2+b^2+c^2-D}$$\n\nUn plano es **tangente** a la esfera si su distancia al centro es igual a $r$.",
+     "ejemplo": "**Ejemplo.** $x^2+y^2+z^2-2x+4y-4=0$.\n\n1. Centro: $(1,-2,0)$.\n\n2. $r=\\sqrt{1+4+0-(-4)}=\\sqrt9=3$."
+    },
+    {
+     "id": "0113rz",
+     "tipo": "ejercicio",
+     "titulo": "Practica la esfera",
+     "tema": "Tema 6 · Ángulos, distancias y esfera",
+     "automaticos": [
+      "gEsf",
+      "tEsf"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01295v",
+     "tipo": "repaso",
+     "titulo": "Repaso de geometría"
+    },
+    {
+     "id": "013o2f",
+     "tipo": "prueba",
+     "titulo": "Prueba final de Geometría",
+     "n": 6
+    }
+   ]
+  },
+  {
+   "id": "analisis",
+   "nombre": "Análisis",
+   "descripcion": "Límites, derivadas e integrales",
+   "items": [
+    {
+     "id": "014ro5",
+     "tipo": "teoria",
+     "titulo": "Dominio y composición",
+     "tema": "Tema 7.0 · Repaso de funciones",
+     "teoria": "**Dominio**: los valores de $x$ para los que la función existe.\n\n- Polinomios: todo $\\mathbb{R}$.\n- Cocientes: se quitan los ceros del denominador.\n- Raíces de índice par: radicando $\\geq0$.\n- Logaritmos: argumento $>0$.\n\n**Composición**: $(f\\circ g)(x)=f\\big(g(x)\\big)$. Primero se aplica $g$ y después $f$.\n\nLa **inversa** $f^{-1}$ cumple $f\\big(f^{-1}(x)\\big)=x$. Se obtiene despejando $x$ en $y=f(x)$.",
+     "ejemplo": "**Ejemplo.** $f(x)=2x+1$ y $g(x)=x^2$.\n\n1. $(f\\circ g)(3)=f(9)=19$.\n\n2. $(g\\circ f)(3)=g(7)=49$. La composición no es conmutativa.\n\n3. $\\operatorname{Dom}\\sqrt{x-2}=[2,+\\infty)$."
+    },
+    {
+     "id": "015bc6",
+     "tipo": "ejercicio",
+     "titulo": "Practica funciones",
+     "tema": "Tema 7.0 · Repaso de funciones",
+     "automaticos": [
+      "tDom",
+      "gComp"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "016jca",
+     "tipo": "teoria",
+     "titulo": "Límites e indeterminaciones",
+     "tema": "Tema 7 · Límites y continuidad",
+     "teoria": "Las indeterminaciones son $\\frac{0}{0}$, $\\frac{\\infty}{\\infty}$, $\\infty-\\infty$, $0\\cdot\\infty$, $1^\\infty$, $0^0$ e $\\infty^0$.\n\n- $\\frac{\\infty}{\\infty}$ con polinomios: se comparan los grados. Con el mismo grado, el límite es el cociente de los coeficientes principales.\n- $\\frac{0}{0}$ con polinomios: se factoriza (Ruffini) y se simplifica. También sirve L'Hôpital.\n- $\\infty-\\infty$ con raíces: se multiplica por el conjugado.\n- $1^\\infty$:\n\n$$\\lim f(x)^{g(x)}=e^{\\lim g(x)\\,\\left(f(x)-1\\right)}$$\n\nLímite notable:\n\n$$\\lim_{u\\to0}\\frac{\\sin u}{u}=1$$",
+     "ejemplo": "**Ejemplo 1.** $\\lim_{x\\to2}\\dfrac{x^2-4}{x-2}=\\lim_{x\\to2}(x+2)=4$.\n\n**Ejemplo 2.** $\\lim_{x\\to\\infty}\\left(1+\\dfrac3x\\right)^{2x}=e^{\\lim 2x\\cdot\\frac3x}=e^6$.\n\n**Ejemplo 3.** $\\lim_{x\\to 0}\\dfrac{\\sin(3x)}{2x}=\\lim\\dfrac{\\sin(3x)}{3x}\\cdot\\dfrac32=\\dfrac32$."
+    },
+    {
+     "id": "0176ci",
+     "tipo": "ejercicio",
+     "titulo": "Practica los límites",
+     "tema": "Tema 7 · Límites y continuidad",
+     "automaticos": [
+      "gLimInf",
+      "gLim00",
+      "gLimSin",
+      "tE",
+      "vfLim"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "018nwn",
+     "tipo": "teoria",
+     "titulo": "Continuidad",
+     "tema": "Tema 7 · Límites y continuidad",
+     "teoria": "$f$ es **continua** en $x=a$ si existe $f(a)$, existe $\\lim_{x\\to a}f(x)$ y ambos coinciden.\n\nTipos de discontinuidad:\n\n- **Evitable**: el límite existe pero no coincide con $f(a)$, o $f(a)$ no existe.\n- **De salto**: los límites laterales son finitos y distintos.\n- **Asintótica**: algún límite lateral es infinito.\n\nEn funciones **a trozos** se igualan los límites laterales en el punto de unión.\n\n**Teorema de Bolzano**: si $f$ es continua en $[a,b]$ y $f(a)\\cdot f(b)<0$, existe $c\\in(a,b)$ con $f(c)=0$.\n\n**Weierstrass**: una función continua en $[a,b]$ alcanza en ese intervalo un máximo y un mínimo absolutos.",
+     "ejemplo": "**Ejemplo.** $f(x)=\\begin{cases}x^2+k & x<1\\\\ 2x+3 & x\\geq1\\end{cases}$\n\n1. Por la izquierda: $1+k$. Por la derecha: $5$.\n\n2. Es continua si $1+k=5$, es decir, $k=4$."
+    },
+    {
+     "id": "0193dt",
+     "tipo": "ejercicio",
+     "titulo": "Practica la continuidad",
+     "tema": "Tema 7 · Límites y continuidad",
+     "automaticos": [
+      "gCont",
+      "vfBolz"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01av0p",
+     "tipo": "teoria",
+     "titulo": "Reglas de derivación",
+     "tema": "Tema 8 · Derivadas",
+     "teoria": "Definición:\n\n$$f'(a)=\\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}$$\n\nTabla básica:\n\n- $(x^n)'=n\\,x^{n-1}$\n- $(e^x)'=e^x$ y $(a^x)'=a^x\\ln a$\n- $(\\ln x)'=\\dfrac1x$\n- $(\\sin x)'=\\cos x$ y $(\\cos x)'=-\\sin x$\n- $(\\tan x)'=1+\\tan^2x$\n\nReglas:\n\n$$(f\\cdot g)'=f'g+fg'$$\n\n$$\\left(\\frac fg\\right)'=\\frac{f'g-fg'}{g^2}$$\n\n$$\\big(f(g(x))\\big)'=f'\\big(g(x)\\big)\\cdot g'(x)$$\n\nSi $f$ es derivable en $a$, es continua en $a$. Al revés no siempre: $|x|$ en $0$.",
+     "ejemplo": "**Ejemplo 1.** $f(x)=x^2e^x$: $f'(x)=2xe^x+x^2e^x$.\n\n**Ejemplo 2.** $g(x)=\\sin(3x^2)$: $g'(x)=6x\\cos(3x^2)$.\n\n**Ejemplo 3.** $f(x)=3x^2+2x$: $f'(x)=6x+2$, así que $f'(1)=8$."
+    },
+    {
+     "id": "01bhwv",
+     "tipo": "ejercicio",
+     "titulo": "Practica las derivadas",
+     "tema": "Tema 8 · Derivadas",
+     "automaticos": [
+      "gDerPol",
+      "tDer",
+      "gDerE",
+      "tChain",
+      "vfDerC"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01c041",
+     "tipo": "teoria",
+     "titulo": "Recta tangente y regla de L'Hôpital",
+     "tema": "Tema 8 · Derivadas",
+     "teoria": "Recta tangente a $f$ en $x=a$:\n\n$$y-f(a)=f'(a)(x-a)$$\n\nLa recta normal tiene pendiente $-\\dfrac{1}{f'(a)}$.\n\n**L'Hôpital**: si $\\frac{f}{g}$ da $\\frac00$ o $\\frac\\infty\\infty$,\n\n$$\\lim\\frac{f(x)}{g(x)}=\\lim\\frac{f'(x)}{g'(x)}$$",
+     "ejemplo": "**Ejemplo 1.** Tangente a $f(x)=x^2$ en $x=1$: $f(1)=1$ y $f'(1)=2$, así que $y=2x-1$.\n\n**Ejemplo 2.** $\\lim_{x\\to0}\\dfrac{e^x-1}{x}=\\lim_{x\\to0}\\dfrac{e^x}{1}=1$."
+    },
+    {
+     "id": "01dme9",
+     "tipo": "ejercicio",
+     "titulo": "Practica tangente y L'Hôpital",
+     "tema": "Tema 8 · Derivadas",
+     "automaticos": [
+      "gTang",
+      "gLHop"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01eaeh",
+     "tipo": "teoria",
+     "titulo": "Monotonía, extremos y curvatura",
+     "tema": "Tema 9 · Aplicaciones de la derivada",
+     "teoria": "- $f'>0$: creciente. $f'<0$: decreciente.\n- Extremos relativos: donde $f'(c)=0$. Si $f''(c)>0$, mínimo; si $f''(c)<0$, máximo.\n- $f''>0$: la gráfica tiene forma $\\cup$. $f''<0$: forma $\\cap$.\n- Punto de inflexión: $f''$ cambia de signo.\n\n**Rolle**: si $f$ es continua en $[a,b]$, derivable en $(a,b)$ y $f(a)=f(b)$, existe $c\\in(a,b)$ con $f'(c)=0$.\n\n**Valor medio**: con las mismas hipótesis salvo $f(a)=f(b)$, existe $c$ con\n\n$$f'(c)=\\frac{f(b)-f(a)}{b-a}$$",
+     "ejemplo": "**Ejemplo.** $f(x)=x^3-3x$.\n\n1. $f'(x)=3x^2-3=0\\iff x=\\pm1$.\n\n2. $f''(x)=6x$: $f''(1)=6>0$, mínimo en $(1,-2)$.\n\n3. $f''(-1)=-6<0$, máximo en $(-1,2)$."
+    },
+    {
+     "id": "01f1da",
+     "tipo": "ejercicio",
+     "titulo": "Practica los extremos",
+     "tema": "Tema 9 · Aplicaciones de la derivada",
+     "automaticos": [
+      "gExtr",
+      "tF2",
+      "vfRolle"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01g3x2",
+     "tipo": "teoria",
+     "titulo": "Asíntotas y representación gráfica",
+     "tema": "Tema 9 · Aplicaciones de la derivada",
+     "teoria": "- **Vertical** $x=a$: si $\\lim_{x\\to a}f(x)=\\pm\\infty$.\n- **Horizontal** $y=L$: si $\\lim_{x\\to\\pm\\infty}f(x)=L$.\n- **Oblicua** $y=mx+n$, con:\n\n$$m=\\lim_{x\\to\\infty}\\frac{f(x)}{x}$$\n\n$$n=\\lim_{x\\to\\infty}\\big(f(x)-mx\\big)$$\n\nPara representar una función: dominio, simetrías, cortes con los ejes, asíntotas, monotonía y extremos, y curvatura.",
+     "ejemplo": "**Ejemplo.** $f(x)=\\dfrac{2x+1}{x-3}$.\n\n1. Asíntota vertical en $x=3$: el denominador se anula y el numerador no.\n\n2. Asíntota horizontal: $\\lim_{x\\to\\infty}f(x)=2$, así que $y=2$."
+    },
+    {
+     "id": "01haik",
+     "tipo": "ejercicio",
+     "titulo": "Practica las asíntotas",
+     "tema": "Tema 9 · Aplicaciones de la derivada",
+     "automaticos": [
+      "gAs"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01is2m",
+     "tipo": "teoria",
+     "titulo": "Optimización",
+     "tema": "Tema 9 · Aplicaciones de la derivada",
+     "teoria": "- Escribe la función que hay que maximizar o minimizar.\n- Con la condición del enunciado, déjala con una sola variable.\n- Deriva e iguala a cero.\n- Comprueba si es máximo o mínimo (con $f''$ o con el signo de $f'$) y responde a lo que se pregunta.",
+     "ejemplo": "**Ejemplo.** Rectángulo de perímetro 20 con área máxima.\n\n1. Lados $x$ y $10-x$: $A(x)=x(10-x)$.\n\n2. $A'(x)=10-2x=0\\iff x=5$, y $A''=-2<0$: es un máximo.\n\n3. Es un cuadrado de lado 5 y área 25."
+    },
+    {
+     "id": "01jbow",
+     "tipo": "ejercicio",
+     "titulo": "Practica la optimización",
+     "tema": "Tema 9 · Aplicaciones de la derivada",
+     "automaticos": [
+      "gOpt",
+      "oOpt"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01kgec",
+     "tipo": "repaso",
+     "titulo": "Repaso: límites y derivadas"
+    },
+    {
+     "id": "01lnyg",
+     "tipo": "teoria",
+     "titulo": "Primitivas inmediatas",
+     "tema": "Tema 10 · Integral indefinida",
+     "teoria": "$F$ es primitiva de $f$ si $F'=f$. Se escribe $\\int f(x)\\,dx=F(x)+C$.\n\n- $\\int x^n\\,dx=\\dfrac{x^{n+1}}{n+1}+C$, con $n\\neq-1$.\n- $\\int\\dfrac{1}{x}\\,dx=\\ln|x|+C$.\n- $\\int e^x\\,dx=e^x+C$ y $\\int a^x\\,dx=\\dfrac{a^x}{\\ln a}+C$.\n- $\\int\\cos x\\,dx=\\sin x+C$ y $\\int\\sin x\\,dx=-\\cos x+C$.\n- $\\int\\dfrac{1}{1+x^2}\\,dx=\\arctan x+C$.\n\nSi en lugar de $x$ aparece una función $u(x)$ y está multiplicada por su derivada $u'$, sigue siendo inmediata. Por ejemplo:\n\n$$\\int\\frac{u'}{u}\\,dx=\\ln|u|+C$$",
+     "ejemplo": "**Ejemplo.** $\\int(3x^2+e^{2x})\\,dx$.\n\n1. $\\int3x^2\\,dx=x^3$.\n\n2. $\\int e^{2x}\\,dx=\\dfrac{e^{2x}}{2}$.\n\n3. Resultado: $x^3+\\dfrac{e^{2x}}{2}+C$."
+    },
+    {
+     "id": "01miuo",
+     "tipo": "ejercicio",
+     "titulo": "Practica las primitivas",
+     "tema": "Tema 10 · Integral indefinida",
+     "automaticos": [
+      "tPrim",
+      "gPrimF",
+      "vfLn"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01n74c",
+     "tipo": "teoria",
+     "titulo": "Métodos de integración",
+     "tema": "Tema 10 · Integral indefinida",
+     "teoria": "**Cambio de variable**: se sustituye $t=g(x)$, con $dt=g'(x)\\,dx$.\n\n**Por partes**:\n\n$$\\int u\\,dv=uv-\\int v\\,du$$\n\nConviene que $u$ se simplifique al derivar (polinomios, logaritmos) y que $dv$ sea fácil de integrar.\n\n**Racionales** con raíces simples en el denominador: se descompone en fracciones simples.\n\n$$\\frac{1}{(x-a)(x-b)}=\\frac{A}{x-a}+\\frac{B}{x-b}$$",
+     "ejemplo": "**Ejemplo 1.** $\\int xe^x\\,dx$ con $u=x$ y $dv=e^xdx$: $xe^x-\\int e^x\\,dx=xe^x-e^x+C$.\n\n**Ejemplo 2.** $\\dfrac{1}{x^2-1}=\\dfrac{1/2}{x-1}-\\dfrac{1/2}{x+1}$, así que:\n\n$$\\int\\frac{dx}{x^2-1}=\\tfrac12\\ln|x-1|-\\tfrac12\\ln|x+1|+C$$"
+    },
+    {
+     "id": "01oppg",
+     "tipo": "ejercicio",
+     "titulo": "Practica los métodos",
+     "tema": "Tema 10 · Integral indefinida",
+     "automaticos": [
+      "tPartes",
+      "gRac"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01pf4c",
+     "tipo": "teoria",
+     "titulo": "Regla de Barrow y teorema fundamental",
+     "tema": "Tema 11 · Integral definida",
+     "teoria": "**Regla de Barrow**: si $F$ es una primitiva de $f$,\n\n$$\\int_a^b f(x)\\,dx=F(b)-F(a)$$\n\n**Teorema fundamental del cálculo**: si $f$ es continua,\n\n$$F(x)=\\int_a^x f(t)\\,dt\\;\\Rightarrow\\;F'(x)=f(x)$$\n\nPropiedades: $\\int_a^a f=0$, $\\int_b^a f=-\\int_a^b f$ y $\\int_a^b f=\\int_a^c f+\\int_c^b f$.",
+     "ejemplo": "**Ejemplo.** $\\int_0^2(x+1)\\,dx$.\n\n1. Una primitiva es $F(x)=\\dfrac{x^2}{2}+x$.\n\n2. $F(2)-F(0)=4-0=4$."
+    },
+    {
+     "id": "01qmq7",
+     "tipo": "ejercicio",
+     "titulo": "Practica Barrow",
+     "tema": "Tema 11 · Integral definida",
+     "automaticos": [
+      "gBarrow",
+      "oBarrow",
+      "vfTFC"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01roye",
+     "tipo": "teoria",
+     "titulo": "Cálculo de áreas",
+     "tema": "Tema 11 · Integral definida",
+     "teoria": "**Área entre $f$ y el eje $OX$**: se buscan los cortes con el eje, se integra en cada tramo y se suman los valores absolutos.\n\n**Área entre dos curvas** $f$ y $g$: se buscan sus puntos de corte $a$ y $b$ y:\n\n$$\\text{Área}=\\int_a^b|f(x)-g(x)|\\,dx$$",
+     "ejemplo": "**Ejemplo.** Área entre $y=x^2$ e $y=2x$.\n\n1. $x^2=2x\\iff x=0$ o $x=2$.\n\n2. En $(0,2)$ está por encima $2x$.\n\n$$\\int_0^2(2x-x^2)\\,dx=4-\\frac83=\\frac43$$"
+    },
+    {
+     "id": "01su2y",
+     "tipo": "ejercicio",
+     "titulo": "Practica las áreas",
+     "tema": "Tema 11 · Integral definida",
+     "automaticos": [
+      "gArea",
+      "vfAbs"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01th8b",
+     "tipo": "repaso",
+     "titulo": "Repaso: integrales"
+    },
+    {
+     "id": "01udhs",
+     "tipo": "prueba",
+     "titulo": "Prueba final de Análisis",
+     "n": 6
+    }
+   ]
+  },
+  {
+   "id": "probabilidad",
+   "nombre": "Probabilidad",
+   "descripcion": "Probabilidad, binomial y normal",
+   "items": [
+    {
+     "id": "01vcmq",
+     "tipo": "teoria",
+     "titulo": "Sucesos y regla de Laplace",
+     "tema": "Tema 12 · Probabilidad",
+     "teoria": "El **espacio muestral** $E$ es el conjunto de resultados posibles. Con dos sucesos $A$ y $B$: unión $A\\cup B$, intersección $A\\cap B$ y contrario $\\overline A$. Son **incompatibles** si $A\\cap B=\\emptyset$.\n\n**Laplace** (resultados equiprobables):\n\n$$P(A)=\\frac{\\text{casos favorables}}{\\text{casos posibles}}$$\n\nPropiedades:\n\n$$P(\\overline A)=1-P(A)$$\n\n$$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$$\n\n**Leyes de De Morgan**: $\\overline{A\\cup B}=\\overline A\\cap\\overline B$ y $\\overline{A\\cap B}=\\overline A\\cup\\overline B$.",
+     "ejemplo": "**Ejemplo.** Se lanzan dos dados. Probabilidad de que sumen 7.\n\n1. Hay $36$ resultados posibles.\n\n2. Favorables: $(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$, es decir, $6$.\n\n3. $P=\\dfrac{6}{36}=\\dfrac16$."
+    },
+    {
+     "id": "01wmao",
+     "tipo": "ejercicio",
+     "titulo": "Practica Laplace y la unión",
+     "tema": "Tema 12 · Probabilidad",
+     "automaticos": [
+      "gDados",
+      "gUnion"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01xzu6",
+     "tipo": "teoria",
+     "titulo": "Probabilidad condicionada e independencia",
+     "tema": "Tema 12 · Probabilidad",
+     "teoria": "Probabilidad de $A$ sabiendo que ha ocurrido $B$:\n\n$$P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}$$\n\nDe aquí: $P(A\\cap B)=P(B)\\cdot P(A\\mid B)$. Es la regla del producto, la que se usa en los diagramas de árbol.\n\n$A$ y $B$ son **independientes** si $P(A\\mid B)=P(A)$, o lo que es lo mismo:\n\n$$P(A\\cap B)=P(A)\\cdot P(B)$$",
+     "ejemplo": "**Ejemplo.** $P(B)=0{,}5$ y $P(A\\cap B)=0{,}2$.\n\n1. $P(A\\mid B)=\\dfrac{0{,}2}{0{,}5}=0{,}4$.\n\n2. Si además $P(A)=0{,}4$, entonces $A$ y $B$ son independientes."
+    },
+    {
+     "id": "01ys0s",
+     "tipo": "ejercicio",
+     "titulo": "Practica la condicionada",
+     "tema": "Tema 12 · Probabilidad",
+     "automaticos": [
+      "gCond",
+      "tCond",
+      "gInd",
+      "vfInd"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "01zges",
+     "tipo": "teoria",
+     "titulo": "Probabilidad total y teorema de Bayes",
+     "tema": "Tema 12 · Probabilidad",
+     "teoria": "Si $A_1,\\dots,A_n$ forman un sistema completo de sucesos (no se solapan y cubren todo $E$):\n\n**Probabilidad total**:\n\n$$P(B)=\\sum_i P(A_i)\\,P(B\\mid A_i)$$\n\n**Teorema de Bayes**:\n\n$$P(A_i\\mid B)=\\frac{P(A_i)\\,P(B\\mid A_i)}{P(B)}$$\n\nUn diagrama de árbol ayuda: cada rama multiplica y las ramas que llevan a $B$ se suman.",
+     "ejemplo": "**Ejemplo.** Se lanza una moneda: con cara se saca una bola de la urna I (2 rojas y 3 blancas); con cruz, de la urna II (4 rojas y 1 blanca).\n\n1. $P(R)=\\frac12\\cdot\\frac25+\\frac12\\cdot\\frac45=\\frac35$.\n\n2. $P(I\\mid R)=\\dfrac{\\frac12\\cdot\\frac25}{\\frac35}=\\dfrac13$."
+    },
+    {
+     "id": "020u1k",
+     "tipo": "ejercicio",
+     "titulo": "Practica Bayes",
+     "tema": "Tema 12 · Probabilidad",
+     "automaticos": [
+      "gTotal",
+      "gBayes"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "021cqo",
+     "tipo": "repaso",
+     "titulo": "Repaso de probabilidad"
+    },
+    {
+     "id": "022dcz",
+     "tipo": "teoria",
+     "titulo": "Distribución binomial",
+     "tema": "Tema 13 · Distribuciones de probabilidad",
+     "teoria": "$X\\sim B(n,p)$ cuenta los éxitos en $n$ pruebas independientes con dos resultados posibles, donde la probabilidad de éxito $p$ es constante.\n\n$$P(X=k)=\\binom{n}{k}p^k(1-p)^{n-k}$$\n\nMedia y desviación típica:\n\n$$\\mu=np\\qquad\\sigma=\\sqrt{np(1-p)}$$",
+     "ejemplo": "**Ejemplo.** $X\\sim B(3;\\,0{,}5)$. Calcula $P(X=1)$.\n\n1. $\\binom{3}{1}=3$.\n\n2. $P=3\\cdot 0{,}5^3=0{,}375$.\n\n3. Media: $\\mu=3\\cdot0{,}5=1{,}5$."
+    },
+    {
+     "id": "023cv7",
+     "tipo": "ejercicio",
+     "titulo": "Practica la binomial",
+     "tema": "Tema 13 · Distribuciones de probabilidad",
+     "automaticos": [
+      "gBin",
+      "vfBin",
+      "gMedia"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "024m2f",
+     "tipo": "teoria",
+     "titulo": "Distribución normal",
+     "tema": "Tema 13 · Distribuciones de probabilidad",
+     "teoria": "$X\\sim N(\\mu,\\sigma)$ tiene forma de campana, simétrica respecto a $\\mu$. Para usar la tabla de $Z\\sim N(0,1)$ se **tipifica**:\n\n$$Z=\\frac{X-\\mu}{\\sigma}$$\n\nLa tabla da $P(Z\\leq z)$ para $z\\geq0$. El resto se obtiene así:\n\n$$P(Z>z)=1-P(Z\\leq z)$$\n\n$$P(Z\\leq -z)=1-P(Z\\leq z)$$\n\n$$P(a\\leq Z\\leq b)=P(Z\\leq b)-P(Z\\leq a)$$\n\n**Aproximación de la binomial**: si $np\\geq5$ y $n(1-p)\\geq5$, entonces $B(n,p)\\approx N\\big(np,\\sqrt{np(1-p)}\\big)$, con corrección de continuidad ($\\pm0{,}5$).",
+     "ejemplo": "**Ejemplo.** $X\\sim N(70,10)$. Calcula $P(X\\leq80)$.\n\n1. $z=\\dfrac{80-70}{10}=1$.\n\n2. $P(Z\\leq1)=0{,}8413$."
+    },
+    {
+     "id": "025lby",
+     "tipo": "ejercicio",
+     "titulo": "Practica la normal",
+     "tema": "Tema 13 · Distribuciones de probabilidad",
+     "automaticos": [
+      "gTipif",
+      "gNormal",
+      "tAprox"
+     ],
+     "ejercicios": []
+    },
+    {
+     "id": "026vz1",
+     "tipo": "repaso",
+     "titulo": "Repaso de distribuciones"
+    },
+    {
+     "id": "027ase",
+     "tipo": "prueba",
+     "titulo": "Prueba final de Probabilidad",
+     "n": 6
+    }
+   ]
+  }
+ ]
+}

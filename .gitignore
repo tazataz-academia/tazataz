@@ -1,0 +1,4 @@
+copias/
+versiones-antiguas/
+*.tmp
+__pycache__/
