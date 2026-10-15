@@ -24,6 +24,170 @@
      "ejemplo": "**Ejemplo.** Calcula $A\\cdot B$ con $A=\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}$ y $B=\\begin{pmatrix}3&1\\\\1&2\\end{pmatrix}$.\n\n1. Fila 1 por columna 1: $1\\cdot3+2\\cdot1=5$. Fila 1 por columna 2: $1\\cdot1+2\\cdot2=5$.\n\n2. Fila 2: $0\\cdot3+1\\cdot1=1$ y $0\\cdot1+1\\cdot2=2$.\n\n$$A\\cdot B=\\begin{pmatrix}5&5\\\\1&2\\end{pmatrix}$$"
     },
     {
+     "id": "jabs3u9e",
+     "tipo": "ejercicio",
+     "titulo": "Filas y columnas",
+     "automaticos": [],
+     "ejercicios": [
+      {
+       "tipo": "test",
+       "enunciado": "Las columnas de una matriz tienen un sentido...",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        "Vertical",
+        "Horizontal"
+       ]
+      },
+      {
+       "tipo": "test",
+       "enunciado": "Las filas de una matriz tienen un sentido...",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        "Horizontal",
+        "Vertical"
+       ]
+      }
+     ],
+     "tema": "Tema 1 · Matrices",
+     "n": 2
+    },
+    {
+     "id": "joni5bfl",
+     "tipo": "ejercicio",
+     "titulo": "Posiciones",
+     "automaticos": [],
+     "ejercicios": [
+      {
+       "tipo": "test",
+       "enunciado": "El elemento $a_{23}$ esta en la fila...",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        "2",
+        "3"
+       ]
+      },
+      {
+       "tipo": "calc",
+       "enunciado": "El elemento en la posición $a_{11}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        ""
+       ],
+       "respuesta": "1"
+      },
+      {
+       "tipo": "calc",
+       "enunciado": "El elemento en la posición $a_{12}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        ""
+       ],
+       "respuesta": "2"
+      },
+      {
+       "tipo": "calc",
+       "enunciado": "El elemento en la posición $a_{13}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        ""
+       ],
+       "respuesta": "3"
+      },
+      {
+       "tipo": "calc",
+       "enunciado": "El elemento en la posición $a_{21}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        ""
+       ],
+       "respuesta": "4"
+      },
+      {
+       "tipo": "calc",
+       "enunciado": "El elemento en la posición $a_{22}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        ""
+       ],
+       "respuesta": "5"
+      },
+      {
+       "tipo": "calc",
+       "enunciado": "El elemento en la posición $a_{23}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        ""
+       ],
+       "respuesta": "6"
+      },
+      {
+       "tipo": "calc",
+       "enunciado": "El elemento en la posición $a_{31}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        ""
+       ],
+       "respuesta": "7"
+      },
+      {
+       "tipo": "calc",
+       "enunciado": "El elemento en la posición $a_{32}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        ""
+       ],
+       "respuesta": "8"
+      },
+      {
+       "tipo": "calc",
+       "enunciado": "El elemento en la posición $a_{33}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
+       "variables": [],
+       "pistas": [],
+       "solucion": [],
+       "verdadero": false,
+       "opciones": [
+        ""
+       ],
+       "respuesta": "9"
+      }
+     ],
+     "tema": "Tema 1 · Matrices",
+     "n": 2
+    },
+    {
      "id": "001mov",
      "tipo": "ejercicio",
      "titulo": "Practica las operaciones",
