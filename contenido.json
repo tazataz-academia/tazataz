@@ -52,10 +52,56 @@
         "Horizontal",
         "Vertical"
        ]
+      },
+      {
+       "tipo": "calc",
+       "enunciado": "El elemento $a_{ {{i}}{{j}} }$ no indica que está en la fila...",
+       "variables": [
+        {
+         "nombre": "i",
+         "tipo": "rango",
+         "min": 1,
+         "max": 3,
+         "sinCero": false
+        },
+        {
+         "nombre": "j",
+         "tipo": "rango",
+         "min": 1,
+         "max": 3,
+         "sinCero": false
+        }
+       ],
+       "pistas": [],
+       "solucion": [],
+       "respuesta": "i"
+      },
+      {
+       "tipo": "calc",
+       "enunciado": "El elemento $a_{ {{i}}{{j}} }$ no indica que está en la columna...",
+       "variables": [
+        {
+         "nombre": "i",
+         "tipo": "rango",
+         "min": 1,
+         "max": 3,
+         "sinCero": false
+        },
+        {
+         "nombre": "j",
+         "tipo": "rango",
+         "min": 1,
+         "max": 3,
+         "sinCero": false
+        }
+       ],
+       "pistas": [],
+       "solucion": [],
+       "respuesta": "j"
       }
      ],
      "tema": "Tema 1 · Matrices",
-     "n": 2
+     "n": 4
     },
     {
      "id": "joni5bfl",
@@ -64,124 +110,36 @@
      "automaticos": [],
      "ejercicios": [
       {
-       "tipo": "test",
-       "enunciado": "El elemento $a_{23}$ esta en la fila...",
-       "variables": [],
-       "pistas": [],
-       "solucion": [],
-       "verdadero": false,
-       "opciones": [
-        "2",
-        "3"
-       ]
-      },
-      {
        "tipo": "calc",
-       "enunciado": "El elemento en la posición $a_{11}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
-       "variables": [],
+       "enunciado": "El elemento $a_{ {{i}}{{j}} }$ de la matriz $A={{A}}$ tiene un valor de...",
+       "variables": [
+        {
+         "nombre": "A",
+         "tipo": "matriz",
+         "filas": 3,
+         "columnas": 3,
+         "min": -9,
+         "max": 9,
+         "sinCero": false
+        },
+        {
+         "nombre": "i",
+         "tipo": "rango",
+         "min": 1,
+         "max": 3,
+         "sinCero": false
+        },
+        {
+         "nombre": "j",
+         "tipo": "rango",
+         "min": 1,
+         "max": 3,
+         "sinCero": false
+        }
+       ],
        "pistas": [],
        "solucion": [],
-       "verdadero": false,
-       "opciones": [
-        ""
-       ],
-       "respuesta": "1"
-      },
-      {
-       "tipo": "calc",
-       "enunciado": "El elemento en la posición $a_{12}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
-       "variables": [],
-       "pistas": [],
-       "solucion": [],
-       "verdadero": false,
-       "opciones": [
-        ""
-       ],
-       "respuesta": "2"
-      },
-      {
-       "tipo": "calc",
-       "enunciado": "El elemento en la posición $a_{13}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
-       "variables": [],
-       "pistas": [],
-       "solucion": [],
-       "verdadero": false,
-       "opciones": [
-        ""
-       ],
-       "respuesta": "3"
-      },
-      {
-       "tipo": "calc",
-       "enunciado": "El elemento en la posición $a_{21}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
-       "variables": [],
-       "pistas": [],
-       "solucion": [],
-       "verdadero": false,
-       "opciones": [
-        ""
-       ],
-       "respuesta": "4"
-      },
-      {
-       "tipo": "calc",
-       "enunciado": "El elemento en la posición $a_{22}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
-       "variables": [],
-       "pistas": [],
-       "solucion": [],
-       "verdadero": false,
-       "opciones": [
-        ""
-       ],
-       "respuesta": "5"
-      },
-      {
-       "tipo": "calc",
-       "enunciado": "El elemento en la posición $a_{23}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
-       "variables": [],
-       "pistas": [],
-       "solucion": [],
-       "verdadero": false,
-       "opciones": [
-        ""
-       ],
-       "respuesta": "6"
-      },
-      {
-       "tipo": "calc",
-       "enunciado": "El elemento en la posición $a_{31}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
-       "variables": [],
-       "pistas": [],
-       "solucion": [],
-       "verdadero": false,
-       "opciones": [
-        ""
-       ],
-       "respuesta": "7"
-      },
-      {
-       "tipo": "calc",
-       "enunciado": "El elemento en la posición $a_{32}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
-       "variables": [],
-       "pistas": [],
-       "solucion": [],
-       "verdadero": false,
-       "opciones": [
-        ""
-       ],
-       "respuesta": "8"
-      },
-      {
-       "tipo": "calc",
-       "enunciado": "El elemento en la posición $a_{33}$ de la matriz $A=\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$",
-       "variables": [],
-       "pistas": [],
-       "solucion": [],
-       "verdadero": false,
-       "opciones": [
-        ""
-       ],
-       "respuesta": "9"
+       "respuesta": "A[i,j]"
       }
      ],
      "tema": "Tema 1 · Matrices",
