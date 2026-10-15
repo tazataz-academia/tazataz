@@ -16,7 +16,11 @@ const rec=(k,j,s,n)=>{init(k);const b=st[k].x[ID(k,j)];if(!b||s/n>b.s/b.n)st[k].
 const nota=(s,n)=>(10*s/n).toFixed(1).replace(".",",");
 const nAv=k=>IT(k).filter(l=>!l.soon&&l.ty!="teoria").length;
 const nDone=k=>IT(k).filter((l,j)=>!l.soon&&l.ty!="teoria"&&D(k,j)).length;
-const open=(k,j)=>{const L=IT(k);if(L[j].soon)return false;if(PREVIEW)return true;for(let q=0;q<j;q++)if(!L[q].soon&&L[q].ty!="teoria"&&!D(k,q))return false;return true};
+// Los temas están abiertos desde el principio; dentro de un tema, cada paso pide haber hecho los anteriores.
+// Los pasos sin tema (repasos y prueba final) se pueden hacer cuando se quiera.
+const open=(k,j)=>{const L=IT(k),it=L[j];if(it.soon)return false;if(PREVIEW||!it.tm)return true;for(let q=0;q<j;q++){const x=L[q];if(x.tm==it.tm&&!x.soon&&x.ty!="teoria"&&!D(k,q))return false}return true};
+const SKIP=.8;
+const tmEj=(k,tm)=>IT(k).map((it,j)=>({it,j})).filter(o=>o.it.tm==tm&&o.it.ty=="ejercicio"&&!o.it.soon);
 const nextOf=(k,j)=>IT(k).findIndex((l,q)=>q>j&&!l.soon&&l.ty!="teoria");
 const app=document.getElementById("app");
 let V={k:null,j:null,tab:"camino"},R=null;
@@ -38,7 +42,27 @@ function home(){
  R=null;V={k:null,j:null,tab:"camino"};const M=C.marca;
  app.innerHTML=`<p class="brand">${esc(M.nombre||"Selectividad")}</p><h1>${esc(M.titulo||"Matemáticas II")}</h1><p class="lead">${esc(M.subtitulo||"")}</p>
  <div class="grid">${Object.entries(B).map(([k,b])=>{const n=nDone(k),t=nAv(k),x=BX(k,IT(k).findIndex(i=>i.ty=="prueba"));return `<button class="card" data-open="${k}"><b>${esc(b.n)}</b><span>${esc(b.d)}</span>${bar(pct(n,t))}<em>${t&&n==t?"Bloque completado":n?`${n} de ${t} pasos`:"Empezar"}${x?` · Nota ${nota(x.s,x.n)}/10`:""}</em></button>`}).join("")}</div>
+ <section class="prog"><p>Tu progreso se guarda en este dispositivo. Para no perderlo si cambias de móvil o borras los datos, guarda tu código.</p>
+ <div class="acts"><button class="ghost" data-a="copiar">Copiar mi código de progreso</button><button class="link" data-a="recuperar">Recuperar progreso</button></div>
+ <p id="copiado" class="okmsg" hidden></p>
+ <div id="recup" hidden><textarea rows="3" placeholder="Pega aquí tu código (empieza por TAZ1-)" aria-label="Código de progreso"></textarea><div class="acts"><button class="btn" data-a="aplicar">Recuperar</button></div><p id="recmsg"></p></div></section>
  ${M.email?`<section class="cta"><h3>${esc(M.ctaTitulo||"")}</h3><p>${esc(M.ctaTexto||"")}</p><a href="${esc(mails())}">Pedir una clase</a></section>`:""}`;
+}
+
+/* Código de progreso: el estado en texto, para guardarlo donde el alumno quiera (por ejemplo, en un chat consigo mismo) */
+const codigo=()=>"TAZ1-"+btoa(unescape(encodeURIComponent(JSON.stringify(st))));
+async function copiarProgreso(){
+ const c=codigo(),o=document.getElementById("copiado");o.hidden=false;
+ try{await navigator.clipboard.writeText(c);o.textContent="Copiado. Pégalo en un chat contigo mismo o en tus notas para tenerlo guardado."}
+ catch(e){o.innerHTML=`Copia este código y guárdalo:<br><textarea rows="3" readonly onclick="this.select()">${esc(c)}</textarea>`}
+}
+function aplicarProgreso(){
+ const t=document.querySelector("#recup textarea").value.trim(),m=document.getElementById("recmsg");
+ try{
+  if(!t.startsWith("TAZ1-"))throw 0;const s=JSON.parse(decodeURIComponent(escape(atob(t.slice(5).replace(/\s/g,"")))));
+  if(!s||typeof s!="object"||Array.isArray(s))throw 0;
+  st=s;save();home();window.scrollTo(0,0);
+ }catch(e){m.className="komsg";m.textContent="Ese código no es válido. Comprueba que lo has copiado entero."}
 }
 
 function doc(k,th){
@@ -56,7 +80,7 @@ function bloque(k,tab){
  body=vis.length?`<ol class="mp">${vis.map(({it,j},v)=>{
   const dn=D(k,j),ok=open(k,j),cu=j==f,bx=BX(k,j),sc=bx?(it.ty=="prueba"?`${nota(bx.s,bx.n)}/10`:`${bx.s}/${bx.n}`):"";
   const sub=it.soon?"Próximamente":dn?sc:bx?`Mejor ${sc}`:"";
-  const h=it.tm&&it.tm!=pv?`<li class="tmh">${esc(it.tm)}</li>`:"";if(it.tm)pv=it.tm;
+  let h="";if(it.tm&&it.tm!=pv){const E=tmEj(k,it.tm),hecho=E.length&&E.every(o=>D(k,o.j));h=`<li class="tmh">${esc(it.tm)}${hecho?' <span class="okt">✓</span>':E.length?`<button class="skip" data-skip="${esc(it.tm)}">Ya lo sé</button>`:""}</li>`}if(it.tm)pv=it.tm;
   return h+`<li style="--x:${XO[v%8]}px"><button class="nd ${it.ty} ${dn?"dn":cu?"cur":ok?"":"lk"}" data-it="${j}" ${ok?"":"disabled"} aria-label="${esc(it.t)}">${cu?`<span class="go">${bx?"Reintentar":"Empezar"}</span>`:""}<span class="dot">${dn?"✓":GL[it.ty]}</span><span class="lb">${esc(it.t)}</span>${sub?`<small>${sub}</small>`:""}</button></li>`}).join("")}</ol>`:`<p class="lead">Todavía no hay ejercicios en este bloque.</p>`}
  else body=doc(k,tab=="teoria");
  app.innerHTML=`<button class="back" data-home>← Todos los bloques</button><div class="hd"><h2>${esc(b.n)}</h2><p>${esc(b.d)}</p>${bar(pct(n,t))}<small>${n} de ${t} pasos superados</small></div>
@@ -106,7 +130,12 @@ function item(k,j){
 }
 const go=(k,j)=>IT(k)[j].ty=="teoria"?item(k,j):start(k,j);
 
-function start(k,j,list){const it=IT(k)[j];R={k,j,list:list||build(k,j),i:0,ph:"ask",pru:it.ty=="prueba",res:[],lock:0,t:Math.random()};
+// Prueba de nivel de un tema: 5 ejercicios sin pistas; con un 80 % se da el tema por hecho
+function saltar(k,tm){
+ const E=tmEj(k,tm);if(!E.length)return;const gens=shuf(E.flatMap(o=>o.it.gen));
+ start(k,E[0].j,[...Array(5)].map((_,q)=>mk(gens[q%gens.length])),{pru:true,skip:tm,titulo:"Prueba de nivel · "+tm});
+}
+function start(k,j,list,extra){const it=IT(k)[j];R={k,j,list:list||build(k,j),i:0,ph:"ask",pru:it.ty=="prueba",res:[],lock:0,t:Math.random(),...(extra||{})};
  if(!R.list.length){app.innerHTML=`<button class="back" data-bk>← ${esc(B[k].n)}</button><p class="lead" style="margin-top:20px">Este paso todavía no tiene ejercicios.</p>`;return}run()}
 const seg=()=>R.list.map((e,q)=>`<i class="${R.res[q]||(q==R.i?"c":"")}"></i>`).join("");
 function footer(msg){
@@ -128,10 +157,12 @@ const setSeg=()=>{document.getElementById("seg").innerHTML=seg()};
 function result(){
  const {k,j,list,pru}=R,n=list.length;
  if(pru)list.forEach((e,q)=>{R.res[q]=(e.val!=null&&!missing(e,e.val)&&good(e,e.val))?"ok":"ko"});
- const s=R.res.filter(x=>x=="ok").length,pass=s>=Math.ceil(n*PASS-1e-9);
- if(!R.prueba1){rec(k,j,s,n);if(pass)fin(k,j)}
- const nx=R.prueba1?-1:nextOf(k,j),nt=nx>=0?IT(k)[nx].t:"";
- const msg=pass?(pru?"Prueba superada. Bloque dominado.":"¡Superado! Sigamos."):`Necesitas al menos ${Math.ceil(n*PASS-1e-9)} de ${n}. Repasa la teoría y vuelve a intentarlo.`;
+ const need=Math.ceil(n*(R.skip?SKIP:PASS)-1e-9),s=R.res.filter(x=>x=="ok").length,pass=s>=need;
+ if(R.skip){if(pass)tmEj(k,R.skip).forEach(o=>fin(k,o.j))}
+ else if(!R.prueba1){rec(k,j,s,n);if(pass)fin(k,j)}
+ const nx=R.prueba1||R.skip?-1:nextOf(k,j),nt=nx>=0?IT(k)[nx].t:"";
+ const msg=R.skip?(pass?"¡Tema superado! Lo hemos marcado como completado.":`Necesitas ${need} de ${n} para saltarlo. Mejor repásalo paso a paso.`)
+  :pass?(pru?"Prueba superada. Bloque dominado.":"¡Superado! Sigamos."):`Necesitas al menos ${need} de ${n}. Repasa la teoría y vuelve a intentarlo.`;
  const rv=pru?list.map((e,q)=>`<div class="box rv ${R.res[q]}"><p class="meta">Ejercicio ${q+1} · ${R.res[q]=="ok"?"Correcto":"Incorrecto"}</p><p class="q">${e.q}</p>${solH(e)}</div>`).join(""):"";
  const b=(pass?(nx>=0?`<button class="btn" data-nx="1">Seguir: ${esc(nt)}</button>`:`<button class="btn" data-bk>Ver el camino</button>`)+`<button class="ghost" data-a="again">Otra vez</button>`:`<button class="btn" data-a="again">Repetir con otros ejercicios</button><button class="ghost" data-bk>Ver el camino</button>`);
  app.innerHTML=`<div class="top"><button class="x" data-bk aria-label="Salir">✕</button><div class="seg">${seg()}</div></div><div class="res ${pass?"ok":"ko"}"><p class="big">${pru?`${nota(s,n)}/10`:`${s}/${n}`}</p><p class="pen ${pass?"ok":""}">${msg}</p></div>${rv}<div class="ft"><div class="acts">${b}</div></div>`;
@@ -166,13 +197,17 @@ app.addEventListener("click",ev=>{
  if("bk" in d)return R&&R.prueba1?R.prueba1():bloque(R?R.k:V.k);
  if(d.tab)return bloque(V.k,d.tab);
  if(d.it!==undefined)return go(V.k,+d.it);
+ if(d.skip)return saltar(V.k,d.skip);
+ if(d.a=="copiar")return copiarProgreso();
+ if(d.a=="recuperar"){const r=document.getElementById("recup");r.hidden=!r.hidden;if(!r.hidden)r.querySelector("textarea").focus();return}
+ if(d.a=="aplicar")return aplicarProgreso();
  if(d.fin){const {k,j}=V;fin(k,j);const nx=nextOf(k,j);return nx>=0?go(k,nx):bloque(k)}
  if(d.nx)return go(R.k,nextOf(R.k,R.j));
  if(!R||R.lock)return;
  const e=R.list[R.i],c=document.querySelector("#qc .qc");
  if(d.pick!==undefined){if(R.ph=="seen")return;e.sel.push(+d.pick);c.querySelector(".ord").innerHTML=ordH(e);if(!R.pru&&e.sel.length==e.steps.length)submit();return}
  if(d.a=="reset"){if(R.ph=="seen")return;e.sel=[];c.querySelector(".ord").innerHTML=ordH(e);return}
- if(d.a=="again")return R.prueba1?R.again():start(R.k,R.j);
+ if(d.a=="again")return R.prueba1?R.again():R.skip?saltar(R.k,R.skip):start(R.k,R.j);
  if(d.a=="check")return submit();
  if(d.a=="sol"){R.ph="seen";R.res[R.i]="ko";setSeg();marcar(c,e,null);return setFt(footer(`<div class="bn sol">${solH(e)}</div>`))}
  if(d.a=="nxt")return nxt();
